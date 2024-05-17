@@ -1,0 +1,142 @@
+CREATE DATABASE IF NOT EXISTS cinema;
+USE cinema;
+
+CREATE TABLE IF NOT EXISTS `Employee` (
+	`employee_id` int NOT NULL UNIQUE,
+	`user` varchar(30) NOT NULL UNIQUE,
+	`first_name` varchar(255) NOT NULL,
+	`last_name` varchar(255) NOT NULL,
+	`position` varchar(15) NOT NULL,
+	`cinema_id` int NOT NULL,
+	`manager_id` int,
+	`employement_date` date NOT NULL,
+	`salary` decimal(10,0) NOT NULL,
+	PRIMARY KEY (`employee_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Cinema` (
+	`cinema_id` int NOT NULL UNIQUE,
+	`cinema_name` varchar(255) NOT NULL,
+	`city` varchar(255) NOT NULL,
+	`street` varchar(40) NOT NULL,
+	`building_n` int NOT NULL,
+	PRIMARY KEY (`cinema_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Hall` (
+	`hall_id` int NOT NULL UNIQUE,
+	`hall_name` varchar(15) NOT NULL,
+	`seat_no` int NOT NULL,
+	`cinema_id` int NOT NULL,
+	PRIMARY KEY (`hall_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Customer` (
+	`customer_id` int NOT NULL UNIQUE,
+	`first_name` varchar(255) NOT NULL,
+	`last_name` varchar(255) NOT NULL,
+	`gender` varchar(255) NOT NULL,
+	`birth_date` date NOT NULL,
+	`phone_number` int NOT NULL UNIQUE,
+	`email` varchar(30) NOT NULL UNIQUE,
+	`discount` int,
+	`vieving_history` varchar(255),
+	PRIMARY KEY (`customer_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Film` (
+	`film_id` int NOT NULL UNIQUE,
+	`title` varchar(30) NOT NULL,
+	`film_description` text NOT NULL,
+	`genre` varchar(255) NOT NULL,
+	`duration` time NOT NULL,
+	PRIMARY KEY (`film_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Ticket` (
+	`ticket_id` int AUTO_INCREMENT NOT NULL UNIQUE,
+	`seat_no` int NOT NULL,
+	`price` decimal(10,0) NOT NULL,
+	`session_id` int NOT NULL,
+	PRIMARY KEY (`ticket_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Transaction` (
+	`transaction_id` int NOT NULL UNIQUE,
+	`transaction_date` datetime NOT NULL,
+	`transaction_amount` decimal(10,2) NOT NULL,
+	`transaction_type` varchar(30) NOT NULL,
+	`castomer_id` int NOT NULL,
+	PRIMARY KEY (`transaction_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Session` (
+	`session_id` int NOT NULL UNIQUE,
+	`start_date` timestamp NOT NULL,
+	`duration` time NOT NULL,
+	`hall_id` int NOT NULL,
+	`film_id` int NOT NULL,
+	`employee_id` int NOT NULL,
+	PRIMARY KEY (`session_id`)
+    
+);
+
+CREATE TABLE IF NOT EXISTS `Product` (
+	`product_id` int NOT NULL UNIQUE,
+	`product_name` varchar(255) NOT NULL,
+	`product_type` varchar(255) NOT NULL,
+	`product_price` decimal(5,2) NOT NULL,
+	PRIMARY KEY (`product_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `Reciept` (
+	`resiept_id` int AUTO_INCREMENT NOT NULL UNIQUE,
+	`transaction_id` int NOT NULL,
+	`ticket_id` int NOT NULL,
+	`product_id` int,
+	PRIMARY KEY (`resiept_id`)
+);
+
+ALTER TABLE Employee
+ADD CONSTRAINT fk_cinema_employee
+FOREIGN KEY (cinema_id) REFERENCES Cinema(cinema_id);
+
+ALTER TABLE Employee
+ADD CONSTRAINT fk_manager_employee
+FOREIGN KEY (manager_id) REFERENCES Employee(employee_id);
+
+ALTER TABLE Hall
+ADD CONSTRAINT fk_cinema_hall
+FOREIGN KEY (cinema_id) REFERENCES Cinema(cinema_id);
+
+ALTER TABLE Session
+ADD CONSTRAINT fk_hall_session
+FOREIGN KEY (hall_id) REFERENCES Hall(hall_id);
+
+ALTER TABLE Session
+ADD CONSTRAINT fk_film_session
+FOREIGN KEY (film_id) REFERENCES Film(film_id);
+
+ALTER TABLE Session
+ADD CONSTRAINT fk_employee_session
+FOREIGN KEY (employee_id) REFERENCES Employee(employee_id);
+
+ALTER TABLE Ticket
+ADD CONSTRAINT fk_session_ticket
+FOREIGN KEY (session_id) REFERENCES Session(session_id);
+
+ALTER TABLE Transaction
+ADD CONSTRAINT fk_customer_transaction
+FOREIGN KEY (castomer_id) REFERENCES Customer(customer_id);
+
+ALTER TABLE Reciept
+ADD CONSTRAINT fk_transaction_receipt
+FOREIGN KEY (transaction_id) REFERENCES Transaction(transaction_id);
+
+ALTER TABLE Reciept
+ADD CONSTRAINT fk_ticket_receipt
+FOREIGN KEY (ticket_id) REFERENCES Ticket(ticket_id);
+
+ALTER TABLE Reciept
+ADD CONSTRAINT fk_product_receipt
+FOREIGN KEY (product_id) REFERENCES Product(product_id);
