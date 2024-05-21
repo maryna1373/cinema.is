@@ -68,7 +68,7 @@ VALUES
 (3, 'Pamfir', 'A story about the tragic fate of Leonid, who has been involved in an unfortunate incident, makes him remember his past actions under the nickname Pamfir.', 'Drama', '01:42:00'),
 
 (4, 'Toy Story', 'A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy\'s room.', 'Animation', '01:21:00'),
-(5, 'Monster School', 'A group of young monsters attend a special school to learn how to scare humans, but they end up learning much more about friendship and acceptance.', 'Family', '01:32:00');
+(5, 'Monsters, Inc', 'A group of young monsters attend a special school to learn how to scare humans, but they end up learning much more about friendship and acceptance.', 'Family', '01:32:00');
 
 INSERT INTO Product (product_id, product_name, product_type, product_price) 
 VALUES 
