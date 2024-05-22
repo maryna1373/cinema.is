@@ -1,0 +1,45 @@
+-- Оновлення суми транзакції
+UPDATE Transaction AS t
+JOIN (
+    SELECT 
+        t.transaction_id,
+        SUM(ti.price + COALESCE(p.product_price, 0)) AS total_amount
+    FROM Ticket AS ti
+    JOIN Reciept AS r ON ti.ticket_id = r.ticket_id
+    JOIN Transaction AS t ON r.transaction_id = t.transaction_id
+    LEFT JOIN Product AS p ON r.product_id = p.product_id
+    GROUP BY t.transaction_id
+) AS sub ON t.transaction_id = sub.transaction_id
+SET t.transaction_amount = sub.total_amount;
+
+-- Надання знижки всім клієнтам які мали чек > 100
+UPDATE Customer AS c
+JOIN (
+    SELECT 
+        t.castomer_id,
+        SUM(ti.price + COALESCE(p.product_price, 0)) AS total_amount
+    FROM Ticket AS ti
+    JOIN Reciept AS r ON ti.ticket_id = r.ticket_id
+    JOIN `Transaction` AS t ON r.transaction_id = t.transaction_id
+    LEFT JOIN Product AS p ON r.product_id = p.product_id
+    GROUP BY t.castomer_id
+    HAVING total_amount > 100
+) AS sub ON c.customer_id = sub.castomer_id
+SET c.discount = 10;
+
+-- Оновлення історії переглядів для клієнтів
+UPDATE Customer AS c
+JOIN (
+    SELECT
+        t.customer_id,
+        GROUP_CONCAT(DISTINCT f.title SEPARATOR ', ') AS viewed_films
+    FROM Ticket AS ti
+    JOIN Session AS s ON ti.session_id = s.session_id
+    JOIN Film AS f ON s.film_id = f.film_id
+    JOIN Reciept AS r ON ti.ticket_id = r.ticket_id
+    JOIN Transaction AS tr ON r.transaction_id = tr.transaction_id
+    JOIN Customer AS t ON tr.castomer_id = t.customer_id
+    GROUP BY t.customer_id
+) AS sub ON c.customer_id = sub.customer_id
+SET c.vieving_history = IFNULL(CONCAT(c.vieving_history, ', ', sub.viewed_films), sub.viewed_films);
+
