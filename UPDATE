@@ -1,3 +1,24 @@
+-- UPDATE 
+UPDATE Session
+SET duration = '03:05:00'
+WHERE film_id = 1;
+
+UPDATE Session
+SET duration = '02:59:00'
+WHERE film_id = 2;
+
+UPDATE Session
+SET duration = '01:52:00'
+WHERE film_id = 3;
+
+UPDATE Session
+SET duration = '01:31:00'
+WHERE film_id = 4;
+
+UPDATE Session
+SET duration = '01:42:00'
+WHERE film_id = 5;
+
 -- Оновлення суми транзакції
 UPDATE Transaction AS t
 JOIN (
