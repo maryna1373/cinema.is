@@ -1088,27 +1088,6 @@ VALUES
 (89, '2024-05-08 19:30:00', '03:00:00', 14, 2, 15),
 (90, '2024-05-08 19:30:00', '03:00:00', 15, 1, 15);
 
--- UPDATE 
-UPDATE Session
-SET duration = '03:05:00'
-WHERE film_id = 1;
-
-UPDATE Session
-SET duration = '02:59:00'
-WHERE film_id = 2;
-
-UPDATE Session
-SET duration = '01:52:00'
-WHERE film_id = 3;
-
-UPDATE Session
-SET duration = '01:31:00'
-WHERE film_id = 4;
-
-UPDATE Session
-SET duration = '01:42:00'
-WHERE film_id = 5;
-
 
 INSERT INTO Ticket (ticket_id, seat_no, price, session_id) 
 VALUES
@@ -6078,16 +6057,3 @@ VALUES
     (890, 2324, 4),
     (891, 2324, NULL),
     (892, 2329, 2);
-
-UPDATE Transaction AS t
-JOIN (
-    SELECT 
-        t.transaction_id,
-        SUM(ti.price + COALESCE(p.product_price, 0)) AS total_amount
-    FROM Ticket AS ti
-    JOIN Reciept AS r ON ti.ticket_id = r.ticket_id
-    JOIN Transaction AS t ON r.transaction_id = t.transaction_id
-    LEFT JOIN Product AS p ON r.product_id = p.product_id
-    GROUP BY t.transaction_id
-) AS sub ON t.transaction_id = sub.transaction_id
-SET t.transaction_amount = sub.total_amount;
