@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals</title>
+    <link rel="stylesheet" href="Deals.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Deals & Discounts</h1>
+    </div>
+    <div class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/Pages/Movies.html">Movies</a>
+        <a href="#">Schedule</a>
+        <a href="/Pages/AboutUs.html">About Us</a>
+        <a href="/Pages/Deals.html">Deals & Discounts</a>
+    </div>
+    <section id="deals">
+        <h2>Current Deals</h2>
+        <div class="deal">
+            <h3 onclick="showDiscount('Monday Madness')">Monday Madness</h3>
+            <p>Enjoy all movies for half the price every Monday. It's the perfect way to start your week!</p>
+        </div>
+        <div class="deal">
+            <h3 onclick="showDiscount('Student Discount')">Student Discount</h3>
+            <p>Students get 20% off on all movie tickets. Just present your student ID at the ticket counter.</p>
+        </div>
+        <div class="deal">
+            <h3 onclick="showDiscount('Family Pack')">Family Pack</h3>
+            <p>Buy 3 tickets and get the 4th one free. Bring your family and enjoy a great movie experience together.</p>
+        </div>
+    </section>
+    <section id="special-offers">
+        <h2>Special Offers</h2>
+        <div class="offer">
+            <h3 onclick="showDiscount('Birthday Bash')">Birthday Bash</h3>
+            <p>Celebrate your birthday with us! Birthday person gets a free ticket and a small popcorn.</p>
+        </div>
+        <div class="offer">
+            <h3 onclick="showDiscount('Senior Citizen Special')">Senior Citizen Special</h3>
+            <p>Senior citizens enjoy a 30% discount on all morning shows. Perfect for a relaxing day out.</p>
+        </div>
+        <div class="offer">
+            <h3 onclick="showDiscount('Military Discount')">Military Discount</h3>
+            <p>Active and retired military personnel receive a 25% discount on all tickets. Thank you for your service!</p>
+        </div>
+    </section>
+
+    <!-- Випливаюче вікно -->
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <h2>Discount Code</h2>
+            <p id="discountCode"></p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Stay tuned for more exciting deals and discounts. Thank you for choosing us!</p>
+    </div>
+
+    <script src="D.js"></script>
+</body>
+</html>

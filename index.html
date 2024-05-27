@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1 id="cinema-title">Select Cinema</h1>
+
+        <select id="cinema-select">
+            <option value="Cineplex">Cineplex</option>
+            <option value="Cinema Citi">Cinema Citi</option>
+            <option value="Silver Screen">Silver Screen</option>
+        </select>
+    </div>
+
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="/Pages/Movies.html">Movies</a>
+        <a href="/Pages/schedule.html">Schedule</a>
+        <a href="/Pages/Deals.html">Deals & Offers</a>
+        <a href="/Pages/AboutUs.html">About Us</a>
+        <a href="#" id="login-link">Login</a>
+        <button id="admin-btn" style="display: none;">Admin Panel</button>
+    </div>
+    <div class="main">
+        
+        <h2 id="cinema-name">Catch it in our cinemas</h2>
+        <div class="movie-list" id="movie-list">
+            <!-- Movie items will be inserted here by JavaScript -->
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2024 Family of cinemas. All rights reserved.</p>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-login">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="login-status"></p>
+        </div>
+    </div>
+
+    <!-- Movie Details Modal -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-movie">&times;</span>
+            <h2 id="movie-title"></h2>
+            <img id="movie-poster" src="" alt="Movie Poster" style="width: 100px;">
+            <p id="movie-description"></p>
+            <p id="movie-duration"></p>
+            <h3>Showtimes</h3>
+            <div id="showtimes"></div>
+            <div id="seats-selection" style="display: none;">
+                <h3>Select Seats</h3>
+                <div id="seats"></div>
+                <button onclick="addTicketsToCart()">Add Tickets to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart -->
+    <div id="cart">
+        <h2>Shopping cart</h2>
+        <div id="cart-items"></div>
+        <div id="user-details" style="display: none;">
+            <h3>User Details</h3>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <label for="discount-code">Discount Code:</label>
+        <input type="text" id="discount-code" name="discount-code">
+        <div id="total" style="margin-top: 10px;"></div> <!-- Відображення загальної суми -->
+        <button id="pay-button" onclick="processPayment()">Pay</button>
+    </div>
+
+<!-- Admin Modal -->
+<div id="admin-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-admin">&times;</span>
+        <h2>Admin Panel</h2>
+
+        <!-- Add Movie -->
+        <div id="add-movie-section">
+            <h3>Add Movie:</h3>
+            <form id="add-movie-form">
+                <label for="add-cinema-select">Select Cinema:</label>
+                <select id="add-cinema-select">
+                    <option value="Cineplex">Cineplex</option>
+                    <option value="Cinema Citi">Cinema Citi</option>
+                    <option value="Silver Screen">Silver Screen</option>
+                </select>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="poster">Poster URL:</label>
+                <input type="text" id="poster" name="poster" required>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="duration">Duration:</label>
+                <input type="text" id="duration" name="duration" required>
+                <label for="showtime">Showtime:</label>
+                <input type="text" id="showtime" name="showtime" required>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+                <label for="hall">Hall:</label>
+                <input type="text" id="hall" name="hall" required>
+                <label for="seats">Seats:</label>
+                <input type="number" id="seats" name="seats" required>
+                <button type="submit">Add Movie</button>
+            </form>
+        </div>
+
+        <!-- Delete Movie -->
+        <div id="delete-movie-section">
+            <h3>Delete Movie:</h3>
+            <label for="delete-cinema-select">Select Cinema:</label>
+            <select id="delete-cinema-select">
+                <option value="Cineplex">Cineplex</option>
+                <option value="Cinema Citi">Cinema Citi</option>
+                <option value="Silver Screen">Silver Screen</option>
+            </select>
+            <label for="delete-movie-select">Select Movie:</label>
+            <select id="delete-movie-select">
+                <!-- Options will be dynamically added by JavaScript -->
+            </select>
+            <button id="delete-movie-btn">Delete Movie</button>
+        </div>
+
+        <!-- Update Movie -->
+        <div id="update-movie-section">
+            <h3>Update Movie:</h3>
+            <label for="update-cinema-select">Select Cinema:</label>
+            <select id="update-cinema-select">
+                <option value="Cineplex">Cineplex</option>
+                <option value="Cinema Citi">Cinema Citi</option>
+                <option value="Silver Screen">Silver Screen</option>
+            </select>
+            <label for="update-movie-dropdown">Select Movie:</label>
+            <select id="update-movie-dropdown">
+                <!-- Options will be dynamically added by JavaScript -->
+            </select>
+            <label for="update-title">Title:</label>
+            <input type="text" id="update-title" name="update-title">
+            <label for="update-poster">Poster URL:</label>
+            <input type="text" id="update-poster" name="update-poster">
+            <label for="update-description">Description:</label>
+            <textarea id="update-description" name="update-description"></textarea>
+            <label for="update-duration">Duration:</label>
+            <input type="text" id="update-duration" name="update-duration">
+            <label for="update-showtime">Showtime:</label>
+            <input type="text" id="update-showtime" name="update-showtime">
+            <label for="update-price">Price:</label>
+            <input type="number" id="update-price" name="update-price">
+            <label for="update-hall">Hall:</label>
+            <input type="text" id="update-hall" name="update-hall">
+            <label for="update-seats">Seats:</label>
+            <input type="number" id="update-seats" name="update-seats">
+            <button id="update-movie-btn">Update Movie</button>
+        </div>
+    </div>
+</div>
+  </div>
+    
+
+    <script src="scripts.js"></script>
+</body>
+</html>

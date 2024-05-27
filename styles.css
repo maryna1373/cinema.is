@@ -1,0 +1,304 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+.header {
+    background-color: #305f74;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    background-color: #d3bd8eda;
+    padding: 10px 0;
+}
+
+button {
+    background-color: #f3f2f1; /* Light beige background color */
+    border: 1px solid #dedddd; /* Slightly darker border color */
+    border-radius: 4px; /* Rounded corners */
+    color: #333; /* Dark text color */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 10pt;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+button:hover {
+    background-color: #dadada; /* Darker beige background color on hover */
+    color: #000; /* Darker text color on hover */
+}
+
+/* Стилі для вибору кінотеатру */
+#cinema-select {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    width: 250px;
+    margin-bottom: 20px;
+    color: #999;
+}
+
+#cinema-select option {
+    font-size: 16px;
+    border: 1px solid #dbdbdb;
+}
+
+/* Стилі для заголовку "Select a Cinema" */
+h2 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #305f74;
+}
+
+/* Опції вибору кінотеатру */
+option {
+    font-size: 16px;
+    color: #a5a5a5;
+    
+}
+
+/* Стилі для підказки про обов'язкове поле */
+#cinemaSelect:invalid {
+    color: #999;
+}
+
+/* Стилі для підказки про обов'язкове поле у фокусі */
+#cinemaSelect:focus:invalid {
+    color: #6a76aa;
+}
+
+
+.nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav button {
+    background-color: #814c4c;
+    color: #fff;
+    border: none;
+    margin: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main {
+    padding: 20px;
+    text-align: center;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.movie-item {
+    width: calc(50% - 40px);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.movie-item:hover {
+    transform: translateY(-5px);
+}
+
+.movie-item img {
+    width: 100%;
+    height: 1100px; /* Задаємо фіксовану висоту для постерів */
+    object-fit: cover; /* Зберігаємо пропорції та обрізаємо зображення */
+    border-radius: 10px;
+}
+
+.movie-item > div {
+    padding: 10px;
+}
+
+.footer {
+    background-color: #305f74;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+#login-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#login-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #305f74;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#login-form button[type="submit"]:hover {
+    background-color: #254152;
+}
+
+#login-status {
+    margin-top: 10px;
+    color: rgb(71, 108, 57);
+    font-weight: bold;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.movie-details {
+    text-align: left;
+}
+
+.soon-on-screen {
+    background-color: rgb(253, 235, 235); /* Світло-червоний фон для блоків фільмів, які ще не вийшли */
+}
+
+#seats {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background-color: rgb(94, 178, 52);
+}
+
+.seat.booked {
+    background-color: rgb(177, 54, 54);
+    cursor: not-allowed;
+}
+
+#cart {
+    margin: 20px auto; /* Вирівнюємо по центру відносно батьківського контейнера */
+    text-align: center; /* Вирівнюємо текст по центру */
+    max-width: 500px; /* Встановлюємо максимальну ширину вікна */
+    background-color: #fff; /* Колір фону */
+    padding: 20px; /* Відступи всередині вікна */
+    border-radius: 10px; /* Закруглені кути */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тінь */
+    
+}
+
+#cart h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+#user-details input {
+    margin-bottom: 10px; /* Відступ між кожним полем вводу */
+    width: calc(100% - 22px); /* Загальна ширина полів вводу (віднімаємо від загальної ширини 22px відступів) */
+    padding: 5px; /* Відступи всередині полів вводу */
+    display: inline-block; /* Встановлюємо властивість display на inline-block */
+}
+#discount-code {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#pay-button {
+    padding: 10px 20px;
+    background-color: #478549da;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pay-button:hover {
+    background-color: #57a759da;
+}

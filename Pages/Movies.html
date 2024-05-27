@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema</title>
+    <link rel="stylesheet" href="Movies.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Movies</h1>
+    </div>
+    <div class="nav">
+        <a href="/index.html">Home</a>
+        <a href="/Pages/Movies.html">Movies</a>
+        <a href="#">Schedule</a>
+        <a href="/Pages/AboutUs.html">About Us</a>
+        <a href="/Pages/Deals.html">Deals & Discounts</a>
+    </div>
+    <div class="main">
+        <h2>Catch it in our cinemas</h2>
+        <div class="movie-list" id="movie-list">
+            <!-- Movie items will be inserted here by JavaScript -->
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2024 Planet Cinema</p>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-login">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="login-status"></p>
+        </div>
+    </div>
+    
+    <!-- Movie Details Modal -->
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-movie">&times;</span>
+            <h2 id="movie-title"></h2>
+            <img id="movie-poster" src="" alt="Movie Poster" style="width: 100px;">
+            <p id="movie-description"></p>
+            <p id="movie-duration"></p>
+            <h3>Showtimes</h3>
+            <div id="showtimes"></div>
+            <div id="seats-selection" style="display: none;">
+                <h3>Select Seats</h3>
+                <div id="seats"></div>
+                <button onclick="addTicketsToCart()">Add Tickets to Cart</button>
+            </div>
+        </div>
+    </div>
+  
+    <!-- Cart -->
+    <div id="cart">
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <div id="user-details" style="display: none;">
+            <h3>User Details</h3>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <label for="discount-code">Discount Code:</label>
+        <input type="text" id="discount-code" name="discount-code">
+        <button id="pay-button" onclick="processPayment()">Pay</button>
+    </div>
+
+    <script src="sm.js"></script>
+</body>
+</html>
+
